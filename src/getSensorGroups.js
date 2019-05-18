@@ -1,7 +1,6 @@
 import fs from 'fs';
-import readline from 'readline';
 
-export const parseLineToSensorGroup = (entry) => {
+export const parseLineToSensorGroup = entry => {
   const data = entry.replace(/['"]+/g, '').split(',');
 
   return {
@@ -12,18 +11,13 @@ export const parseLineToSensorGroup = (entry) => {
   };
 };
 
-export default async (path) => {
-  return new Promise((resolve) => {
-    let sensorGroups = [];
+export default path => {
+  const sensorGroups =
+    fs.readFileSync(path, 'utf8')
+      .split('\n')
+      .map(line => parseLineToSensorGroup(line));
 
-    readline
-      .createInterface({ input: fs.createReadStream(path) })
-      .on('line', (line) => {
-        sensorGroups.push(parseLineToSensorGroup(line));
-      })
-      .on('close', () => {
-        sensorGroups.shift();
-        resolve(sensorGroups);
-      });
-  });
+  sensorGroups.shift();
+
+  return sensorGroups;
 };

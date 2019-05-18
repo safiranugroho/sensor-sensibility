@@ -1,3 +1,3 @@
-import getSensorGroups from './src/getSensorGroups';
+import { start } from './src/subscribeToChannel';
 
-console.log(await getSensorGroups('data/sensor_group_location.csv'));
+start();
