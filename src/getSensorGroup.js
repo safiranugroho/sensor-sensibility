@@ -26,23 +26,19 @@ export const createSensorGroup = (entry) => {
 
 const defaultPath = 'data/sensor_group_location.csv';
 export const createSensorGroups = () => {
-  const sensorGroups = {};
+  const sensorGroups =
+    fs.readFileSync(defaultPath, 'utf8')
+      .split('\n')
+      .map(entry => createSensorGroup(entry));
 
-  fs.readFileSync(defaultPath, 'utf8')
-    .split('\n')
-    .forEach(entry => {
-      const group = createSensorGroup(entry);
-      sensorGroups[group.name] = group;
-    });
+  sensorGroups.shift();
 
-  delete sensorGroups.group_name;
   return sensorGroups;
 };
 
 const sensorGroups = createSensorGroups();
 export default (message) => {
-  const groups = Object.values(sensorGroups);
-  const sensorGroup = groups.find(sensorGroup =>
+  const sensorGroup = sensorGroups.find(sensorGroup =>
     RegExp(`(${sensorGroup.uuidStartsWith})`).test(message.sensor_uuid));
 
   return sensorGroup;

@@ -31,7 +31,7 @@ describe('getSensorGroup', () => {
   describe('createSensorGroups', () => {
 
     it('should create 11 sensor groups from the csv', () => {
-      const sensorGroups = Object.values(createSensorGroups());
+      const sensorGroups = createSensorGroups();
       expect(sensorGroups.length).toEqual(11);
     });
   });
