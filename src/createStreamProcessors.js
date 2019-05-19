@@ -15,7 +15,7 @@ export const createStreamProcessor = (name, element, windowSize) => {
     .pipe(
       windowCount(windowSize),
       map(window => window.pipe(
-        reduce((acc, value) => acc + value),
+        reduce((prevValue, nextValue) => prevValue + nextValue),
         map(value => value / windowSize)
       )),
       mergeAll()
@@ -27,6 +27,7 @@ export const createStreamProcessor = (name, element, windowSize) => {
 
 export default (name, windowSize = 10) => {
   if (name === 'group_10') windowSize = windowSize * 3;
+  if (name === 'group_all') windowSize = windowSize * 5;
 
   return {
     light: createStreamProcessor(name, Element.LIGHT, windowSize),

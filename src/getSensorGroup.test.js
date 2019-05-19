@@ -1,14 +1,12 @@
-import createStreamProcessors, { createStreamProcessor } from './createStreamProcessors';
-import getSensorGroup, { createSensorGroups, createSensorGroup } from './getSensorGroup';
+import createStreamProcessors from './createStreamProcessors';
+import getSensorGroup, { createSensorGroups, createSensorGroup, createGeneralGroup } from './getSensorGroup';
 
 jest.mock('./createStreamProcessors');
 
 describe('getSensorGroup', () => {
-
   beforeAll(jest.clearAllMocks);
 
   describe('createSensorGroup', () => {
-
     it('should get create an object from a single line entry from csv', () => {
       const entry = '"group_0","probe-0","-16.876261","145.753509"';
       const sensorGroup = createSensorGroup(entry);
@@ -27,10 +25,18 @@ describe('getSensorGroup', () => {
   });
 
   describe('createSensorGroups', () => {
-
     it('should create 11 sensor groups from the csv', () => {
       const sensorGroups = createSensorGroups();
       expect(sensorGroups.length).toEqual(11);
+    });
+  });
+
+  describe('createGeneralGroup', () => {
+    it('should create a general group to calculate rolling average across all sensors', () => {
+      createGeneralGroup();
+      const generalGroupName = 'group_all';
+
+      expect(createStreamProcessors).toBeCalledWith(generalGroupName);
     });
   });
 

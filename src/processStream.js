@@ -1,6 +1,6 @@
-import getSensorGroup, { createGeneralGroup } from './getSensorGroup';
+import getSensorGroup, { getGeneralGroup } from './getSensorGroup';
 
-const processStream = (message, sensorGroup) => {
+export const processStream = (message, sensorGroup) => {
   const { light, humidity, temperature, radiation } = sensorGroup;
 
   light.next(Number(message.photosensor));
@@ -9,8 +9,8 @@ const processStream = (message, sensorGroup) => {
   radiation.next(Number(message.radiation_level));
 };
 
-const allGroups = createGeneralGroup();
 export const acrossAllGroups = (message) => {
+  const allGroups = getGeneralGroup();
   processStream(message, allGroups);
 };
 
