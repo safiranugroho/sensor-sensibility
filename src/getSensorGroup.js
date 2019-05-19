@@ -1,11 +1,11 @@
 import fs from 'fs';
-import createStreamProcessor from './createStreamProcessor';
+import createStreamProcessors from './createStreamProcessors';
 
-export const Element = {
-  LIGHT: 'light',
-  HUMIDITY: 'humidity',
-  TEMPERATURE: 'temperature',
-  RADIATION: 'radiation'
+export const createGeneralGroup = () => {
+  const name = 'group_all';
+  const windowSize = 50;
+
+  return createStreamProcessors(name, windowSize);
 };
 
 export const createSensorGroup = (entry) => {
@@ -17,10 +17,7 @@ export const createSensorGroup = (entry) => {
     uuidStartsWith: data[1],
     latitude: data[2],
     longitude: data[3],
-    light: createStreamProcessor(name, Element.LIGHT),
-    humidity: createStreamProcessor(name, Element.HUMIDITY),
-    radiation: createStreamProcessor(name, Element.RADIATION),
-    temperature: createStreamProcessor(name, Element.TEMPERATURE)
+    ...createStreamProcessors(name)
   };
 };
 

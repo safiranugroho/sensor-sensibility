@@ -1,10 +1,11 @@
-import createStreamProcessor from './createStreamProcessor';
-import getSensorGroup, { createSensorGroups, createSensorGroup, Element } from './getSensorGroup';
+import createStreamProcessors, { createStreamProcessor } from './createStreamProcessors';
+import getSensorGroup, { createSensorGroups, createSensorGroup } from './getSensorGroup';
 
-jest.mock('./createStreamProcessor');
-createStreamProcessor.mockImplementation((name, element) => ({ name, element }));
+jest.mock('./createStreamProcessors');
 
 describe('getSensorGroup', () => {
+
+  beforeAll(jest.clearAllMocks);
 
   describe('createSensorGroup', () => {
 
@@ -18,13 +19,10 @@ describe('getSensorGroup', () => {
         uuidStartsWith: 'probe-0',
         latitude: '-16.876261',
         longitude: '145.753509',
-        light: createStreamProcessor(name, Element.LIGHT),
-        humidity: createStreamProcessor(name, Element.HUMIDITY),
-        radiation: createStreamProcessor(name, Element.RADIATION),
-        temperature: createStreamProcessor(name, Element.TEMPERATURE)
       };
 
       expect(sensorGroup).toEqual(expectedSensorGroup);
+      expect(createStreamProcessors).toBeCalledTimes(1);
     });
   });
 
