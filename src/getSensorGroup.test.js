@@ -1,8 +1,8 @@
 import createStreamProcessor from './createStreamProcessor';
-import getSensorGroup, { createSensorGroups, createSensorGroup } from './getSensorGroup';
+import getSensorGroup, { createSensorGroups, createSensorGroup, Element } from './getSensorGroup';
 
 jest.mock('./createStreamProcessor');
-createStreamProcessor.mockImplementation((name) => ({ name }));
+createStreamProcessor.mockImplementation((name, element) => ({ name, element }));
 
 describe('getSensorGroup', () => {
 
@@ -18,7 +18,10 @@ describe('getSensorGroup', () => {
         uuidStartsWith: 'probe-0',
         latitude: '-16.876261',
         longitude: '145.753509',
-        subject: createStreamProcessor(name)
+        light: createStreamProcessor(name, Element.LIGHT),
+        humidity: createStreamProcessor(name, Element.HUMIDITY),
+        radiation: createStreamProcessor(name, Element.RADIATION),
+        temperature: createStreamProcessor(name, Element.TEMPERATURE)
       };
 
       expect(sensorGroup).toEqual(expectedSensorGroup);

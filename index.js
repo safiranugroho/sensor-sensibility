@@ -1,3 +1,3 @@
-import { start } from './src/subscribeToChannel';
+import start from './src/start';
 
 start();

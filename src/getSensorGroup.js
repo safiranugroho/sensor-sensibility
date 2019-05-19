@@ -1,6 +1,13 @@
 import fs from 'fs';
 import createStreamProcessor from './createStreamProcessor';
 
+export const Element = {
+  LIGHT: 'light',
+  HUMIDITY: 'humidity',
+  TEMPERATURE: 'temperature',
+  RADIATION: 'radiation'
+};
+
 export const createSensorGroup = (entry) => {
   const data = entry.replace(/['"]+/g, '').split(',');
   const name = data[0];
@@ -10,7 +17,10 @@ export const createSensorGroup = (entry) => {
     uuidStartsWith: data[1],
     latitude: data[2],
     longitude: data[3],
-    subject: createStreamProcessor(name)
+    light: createStreamProcessor(name, Element.LIGHT),
+    humidity: createStreamProcessor(name, Element.HUMIDITY),
+    radiation: createStreamProcessor(name, Element.RADIATION),
+    temperature: createStreamProcessor(name, Element.TEMPERATURE)
   };
 };
 
