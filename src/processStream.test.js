@@ -4,7 +4,6 @@ import { Element } from './createStreamProcessors';
 
 jest.mock('./getSensorGroup');
 
-
 describe('processStream', () => {
   const mockStreamProcessors = {
     light: { next: jest.fn() },

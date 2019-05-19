@@ -1,5 +1,9 @@
 import createStreamProcessors from './createStreamProcessors';
-import getSensorGroup, { createSensorGroups, createSensorGroup, createGeneralGroup } from './getSensorGroup';
+import getSensorGroup, {
+  createSensorGroups,
+  createSensorGroup,
+  createGeneralGroup,
+} from './getSensorGroup';
 
 jest.mock('./createStreamProcessors');
 
@@ -32,7 +36,7 @@ describe('getSensorGroup', () => {
   });
 
   describe('createGeneralGroup', () => {
-    it('should create a general group to calculate rolling average across all sensors', () => {
+    it('should create stream processors to calculate rolling average across all sensors', () => {
       createGeneralGroup();
       const generalGroupName = 'group_all';
 
