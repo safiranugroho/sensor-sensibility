@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs';
 import { windowCount, map, reduce, mergeAll } from 'rxjs/operators';
 
+import { publishFromStream } from './publishToView';
+
 export default (name, element, windowSize) => {
   const subject = new Subject();
 
@@ -13,7 +15,9 @@ export default (name, element, windowSize) => {
       )),
       mergeAll()
     )
-    .subscribe(value => console.log(`${name} - ${element}: ${value.toFixed(2)}`));;
+    .subscribe(value =>
+      publishFromStream({ name, element, value })
+    );
 
   return subject;
 };

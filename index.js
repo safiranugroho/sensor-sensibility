@@ -1,19 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 
+import subscribeToStream from './src/lib/subscribeToStream';
+import publishToView from './src/lib/publishToView';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
+subscribeToStream();
+
 app
   .use(cors())
-  .get('/api', (request, response) => {
-    response.status(200).set({
-      'connection': 'keep-alive',
-      'cache-control': 'no-chace',
-      'content-Type': 'text/event-stream'
-    });
+  .get('/api', publishToView);
 
-    response.write(`data: Hi from server!\n\n`);
-  });
-
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`
+🐒  Server running at http://localhost:${port}`));
