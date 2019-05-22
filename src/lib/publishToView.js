@@ -1,7 +1,11 @@
 let out;
+const sensorGroups = {};
 
 export const publishFromStream = ({ name, element, value }) => {
-  const data = `${name} - ${element}: ${value.toFixed(2)}`;
+  if (!sensorGroups[name]) sensorGroups[name] = {};
+  sensorGroups[name][element] = value;
+
+  const data = JSON.stringify(sensorGroups);
   out.write(`data: ${data}\n\n`);
 };
 
