@@ -1,11 +1,5 @@
+import Element from './Element';
 import createStreamProcessor from './createStreamProcessor';
-
-export const Element = {
-  LIGHT: 'light',
-  HUMIDITY: 'humidity',
-  TEMPERATURE: 'temperature',
-  RADIATION: 'radiation'
-};
 
 export default (name, windowSize = 50) => ({
   light: createStreamProcessor(name, Element.LIGHT, windowSize),

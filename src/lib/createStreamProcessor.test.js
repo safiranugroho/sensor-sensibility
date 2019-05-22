@@ -37,4 +37,4 @@ describe('roundUp', () => {
 
     expect(roundUp(value)).toEqual(expectedValue);
   });
-})
+});

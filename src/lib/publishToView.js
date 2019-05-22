@@ -1,12 +1,19 @@
 let out;
-const sensorGroups = {};
+let sensorGroups = {};
 
-export const publishFromStream = ({ name, element, value }) => {
+export const aggregateDataFromStream = (sensorGroups, data) => {
+  const { name, element, value } = data;
+
   if (!sensorGroups[name]) sensorGroups[name] = {};
   sensorGroups[name][element] = value;
 
-  const data = JSON.stringify(sensorGroups);
-  out.write(`data: ${data}\n\n`);
+  return sensorGroups;
+};
+
+export const publishFromStream = (data) => {
+  sensorGroups = aggregateDataFromStream(sensorGroups, data);
+  out.write(`data: FROM STREAM\n\n`);
+  out.write(`data: ${JSON.stringify(sensorGroups)}\n\n`);
 };
 
 export default (request, response) => {

@@ -1,6 +1,6 @@
 import * as processStream from './processStream';
+import Element from './Element';
 import getSensorGroup, { getGeneralGroup } from './getSensorGroup';
-import { Element } from './createStreamProcessors';
 
 jest.mock('./getSensorGroup');
 
