@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start-server": "babel-node index.js",
-    "start-client": "parcel src/app/index.html --open",
+    "start-server": "babel-node api/index.js",
+    "start-client": "parcel app/index.html --open",
     "test": "jest"
   },
   "devDependencies": {
