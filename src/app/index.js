@@ -1,8 +1,7 @@
-import './index.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const port = process.env.PORT || 3000;
-const eventSource = new EventSource(`//localhost:${port}/api`);
+import App from './App';
 
-eventSource.onmessage = (event) => {
-  document.body.innerHTML = event.data;
-};
+const root = document.getElementById('app');
+ReactDOM.render(<App />, root);
