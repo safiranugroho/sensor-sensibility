@@ -1,5 +1,10 @@
 import Element from './Element';
-import { aggregateDataFromStream } from './publishToView';
+import {
+  publishFromStream,
+  aggregateDataFromStream,
+  getLocationData,
+  includeLocationData
+} from './publishToView';
 
 describe('aggregateDataFromStream', () => {
   let initialSensorGroups, dataFromStream, expectedData;
@@ -91,5 +96,66 @@ describe('aggregateDataFromStream', () => {
     };
 
     assert();
+  });
+});
+
+describe('getLocationData', () => {
+  it('should return an object with name, latitude, and longitude given a string', () => {
+    const entry = '"group_0","probe-0","-16.876261","145.753509"';
+    const expectedLocationData = {
+      name: 'group_0',
+      latitude: '-16.876261',
+      longitude: '145.753509'
+    };
+
+    expect(getLocationData(entry)).toEqual(expectedLocationData);
+  });
+});
+
+describe('includeLocationData', () => {
+  it('should return the sensor groups object with location data', () => {
+    const sensorGroups = {
+      group_0: {
+        light: 32.1
+      }
+    };
+
+    const expectedSensorGroups = {
+      group_0: {
+        light: 32.1,
+        latitude: '-16.876261',
+        longitude: '145.753509'
+      }
+    };
+
+    expect(includeLocationData(sensorGroups)).toEqual(expectedSensorGroups);
+  });
+});
+
+describe('publishFromStream', () => {
+  jest.spyOn(console, 'log');
+
+  it('should aggregate the data from stream by group and include the location data', () => {
+    const dataFromStream = {
+      name: 'group_0',
+      element: Element.LIGHT,
+      value: 32.1
+    };
+
+    publishFromStream(dataFromStream);
+
+    const dataSent = {
+      group_0: {
+        light: 32.1,
+        latitude: '-16.876261',
+        longitude: '145.753509'
+      }
+    }
+
+    const consoleLogArgument = console.log.mock.calls[0][0];
+    const consoleLogCalledTimes = console.log.mock.calls.length;
+
+    expect(consoleLogCalledTimes).toEqual(1);
+    expect(consoleLogArgument).toEqual(dataSent);
   });
 });

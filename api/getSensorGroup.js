@@ -1,5 +1,5 @@
-import fs from 'fs';
 import createStreamProcessors from './createStreamProcessors';
+import readFromFile from './readFromFile';
 
 export const createGeneralGroup = () => {
   const name = 'group_all';
@@ -22,16 +22,8 @@ export const createSensorGroup = (entry) => {
   };
 };
 
-const defaultPath = 'data/sensor_group_location.csv';
 export const createSensorGroups = () => {
-  const sensorGroups =
-    fs.readFileSync(defaultPath, 'utf8')
-      .split('\n')
-      .map(entry => createSensorGroup(entry));
-
-  sensorGroups.shift();
-
-  return sensorGroups;
+  return readFromFile(createSensorGroup);
 };
 
 const sensorGroups = createSensorGroups();
