@@ -1,7 +1,9 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import { Subhead } from 'rebass';
 
 import useGraphState from '../utils/useGraphState';
+import { SensorGroup } from '../utils/enums';
 
 const port = process.env.PORT || 3000;
 const eventSource = new EventSource(`//localhost:${port}/api`);
@@ -14,5 +16,10 @@ export default ({ sensorGroupName }) => {
     if (sensorGroup) updateGraphState(sensorGroup);
   };
 
-  return <Chart options={options} series={series} />
+  return (
+    <>
+      <Subhead style={{ margin: '10px' }}>{SensorGroup[sensorGroupName]}</Subhead>
+      <Chart options={options} series={series} />
+    </>
+  )
 };

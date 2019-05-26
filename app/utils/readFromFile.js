@@ -8,6 +8,7 @@ export default (callback) => {
       .map(callback);
 
   sensorGroups.shift();
+  sensorGroups.unshift({ name: 'group_all' });
 
   return sensorGroups;
 };

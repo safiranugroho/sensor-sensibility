@@ -17,4 +17,5 @@ export const SensorGroup = {
   group_8: 'Group 8',
   group_9: 'Group 9',
   group_10: 'Group 10',
+  group_all: 'All groups'
 };

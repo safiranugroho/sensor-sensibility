@@ -1,13 +1,13 @@
-import React from 'react';
-import { Provider, Toolbar, Heading, Select } from 'rebass';
+import React, { useState } from 'react';
+import { Provider, Toolbar, Heading } from 'rebass';
 
 import Graph from './Graph';
-import readFromFile from '../utils/readFromFile';
-import getLocation from '../utils/getLocation';
-import { SensorGroup } from '../utils/enums';
+import Dropdown from './Dropdown';
 
 export default () => {
-  const sensorGroupLocations = readFromFile(getLocation);
+  const [currentSensorGroup, setCurrentSensorGroup] = useState('group_all');
+
+  const handleOnChange = (event) => setCurrentSensorGroup(event.target.value);
 
   return (
     <Provider px={20}>
@@ -18,19 +18,9 @@ export default () => {
         <Heading py={20}>
           Sensor Sensibility
         </Heading>
-        <Select
-          style={{
-            marginLeft: 'auto',
-            width: '100px',
-            padding: '10px',
-            border: '0',
-          }}>
-          {sensorGroupLocations.map(({ name }, key) =>
-            <option key={key}>{SensorGroup[name]}</option>
-          )}
-        </Select>
+        <Dropdown onChange={handleOnChange} />
       </Toolbar>
-      <Graph sensorGroupName='group_1' />
+      <Graph sensorGroupName={currentSensorGroup} />
     </Provider>
   )
 };
