@@ -13,3 +13,10 @@ for the underlying sensor groups as well as totals across all groups.
 The visualisations should be updated in near real time.
 
 The sensor stream it connects to can be found here: https://www.pubnub.com/developers/realtime-data-streams/sensor-network/
+
+## Requirements
+- Node.js 8.15+
+
+## Running the application
+Clone the repository and run `./go` to run the application locally.
+This will open `http://localhost:1234` on your browser.
