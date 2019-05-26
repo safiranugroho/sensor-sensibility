@@ -18,8 +18,12 @@ export default ({ sensorGroupName }) => {
 
   return (
     <>
-      <Subhead style={{ margin: '10px' }}>{SensorGroup[sensorGroupName]}</Subhead>
-      <Chart options={options} series={series} />
+      <Subhead style={{ margin: '10px' }}>
+        {SensorGroup[sensorGroupName]}
+      </Subhead>
+      <Chart
+        options={options}
+        series={series} />
     </>
   )
 };

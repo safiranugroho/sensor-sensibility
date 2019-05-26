@@ -1,23 +1,20 @@
 import React from 'react';
 import { Select } from 'rebass';
 
-import readFromFile from '../utils/readFromFile';
-import getLocation from '../utils/getLocation';
 import { SensorGroup } from '../utils/enums';
 
-export default ({ onChange }) => {
-  const sensorGroupLocations = readFromFile(getLocation);
-
+export default ({ sensorGroups, onChange }) => {
   return (
     <Select
       onChange={onChange}
       style={{
+        backgroundColor: 'white',
         marginLeft: 'auto',
         width: '120px',
         padding: '10px',
         border: '0',
       }}>
-      {sensorGroupLocations.map(({ name }, key) =>
+      {sensorGroups.map(({ name }, key) =>
         <option
           key={key}
           value={name}>
