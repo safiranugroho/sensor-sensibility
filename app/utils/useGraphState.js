@@ -31,7 +31,7 @@ const defaultOptions = {
     toolbar: { show: false },
     animations: { enabled: false }
   },
-  colors: ['#007281', '#FFDB00', '#812711', '#22D213'],
+  colors: ['#004D40', '#FFC107', '#D81B60', '#1E88E5'],
   stroke: { curve: 'smooth' },
   grid: { show: false },
   fill: {
