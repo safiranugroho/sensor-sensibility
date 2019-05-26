@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import Element from './Element';
 import getData from './getData';
+import { Element } from './enums';
 
 const defaultSeries = {
   [Element.TEMPERATURE]: {

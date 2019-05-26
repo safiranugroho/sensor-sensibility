@@ -1,5 +1,5 @@
-import Element from './Element';
 import getData from './getData';
+import { Element } from './enums';
 
 describe('getData', () => {
   it('should take the light, humidity, radiation, and temperature readings ' +

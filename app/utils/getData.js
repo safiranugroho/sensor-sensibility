@@ -1,4 +1,4 @@
-import Element from './Element';
+import { Element } from './enums';
 
 export default (sensorGroup) => {
   const timestamp = Date.now();

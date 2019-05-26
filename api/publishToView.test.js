@@ -1,9 +1,7 @@
 import Element from './Element';
 import {
   publishFromStream,
-  aggregateDataFromStream,
-  getLocationData,
-  includeLocationData
+  aggregateDataFromStream
 } from './publishToView';
 
 describe('aggregateDataFromStream', () => {
@@ -99,39 +97,6 @@ describe('aggregateDataFromStream', () => {
   });
 });
 
-describe('getLocationData', () => {
-  it('should return an object with name, latitude, and longitude given a string', () => {
-    const entry = '"group_0","probe-0","-16.876261","145.753509"';
-    const expectedLocationData = {
-      name: 'group_0',
-      latitude: '-16.876261',
-      longitude: '145.753509'
-    };
-
-    expect(getLocationData(entry)).toEqual(expectedLocationData);
-  });
-});
-
-describe('includeLocationData', () => {
-  it('should return the sensor groups object with location data', () => {
-    const sensorGroups = {
-      group_0: {
-        light: 32.1
-      }
-    };
-
-    const expectedSensorGroups = {
-      group_0: {
-        light: 32.1,
-        latitude: '-16.876261',
-        longitude: '145.753509'
-      }
-    };
-
-    expect(includeLocationData(sensorGroups)).toEqual(expectedSensorGroups);
-  });
-});
-
 describe('publishFromStream', () => {
   jest.spyOn(console, 'log');
 
@@ -146,9 +111,7 @@ describe('publishFromStream', () => {
 
     const dataSent = {
       group_0: {
-        light: 32.1,
-        latitude: '-16.876261',
-        longitude: '145.753509'
+        light: 32.1
       }
     }
 
