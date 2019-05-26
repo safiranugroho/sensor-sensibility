@@ -19,3 +19,10 @@ export const SensorGroup = {
   group_10: 'Group 10',
   group_all: 'All groups'
 };
+
+export const Color = {
+  [Element.TEMPERATURE]: '#004D40',
+  [Element.LIGHT]: '#FFC107',
+  [Element.RADIATION]: '#D81B60',
+  [Element.HUMIDITY]: '#1E88E5'
+}

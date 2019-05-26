@@ -1,37 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
-import styled from 'styled-components';
 import { Subhead } from 'rebass';
 
+import Legend from './Legend';
 import useGraphState from '../utils/useGraphState';
 import { SensorGroup } from '../utils/enums';
 
 const port = process.env.PORT || 3000;
 const eventSource = new EventSource(`//localhost:${port}/api`);
 
-const GraphContainer = styled.div`
-  padding-top: 150px;
-  overflow: hidden;
-`;
+const SubheadStyle = { margin: '10px' };
 
 export default ({ sensorGroupName }) => {
   const [{ options, series }, updateGraphState] = useGraphState();
+  const [currentSensorGroup, updateCurrentSensorGroup] = useState({});
 
-  eventSource.onmessage = (event) => {
-    const sensorGroup = JSON.parse(event.data)[sensorGroupName];
-    if (sensorGroup) updateGraphState(sensorGroup);
+  eventSource.onmessage = ({ data }) => {
+    const sensorGroup = JSON.parse(data)[sensorGroupName];
+    if (sensorGroup) {
+      updateGraphState(sensorGroup);
+      updateCurrentSensorGroup(sensorGroup);
+    };
   };
 
   return (
     <>
-      <Subhead style={{ margin: '10px' }}>
+      <Subhead style={SubheadStyle}>
         {SensorGroup[sensorGroupName]}
       </Subhead>
-      <GraphContainer>
-        <Chart
-          options={options}
-          series={series} />
-      </GraphContainer>
+      <Legend sensorGroup={currentSensorGroup} />
+      <Chart options={options} series={series} />
     </>
   )
 };

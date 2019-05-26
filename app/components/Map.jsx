@@ -1,15 +1,24 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
-import { Circle } from 'rebass';
+import { Box, Circle } from 'rebass';
 
 import getMapStyles from '../utils/getMapStyles';
 
-export default ({ location }) => {
-  const options = {
-    fullscreenControl: false,
-    styles: getMapStyles()
-  };
+const mapOptions = {
+  fullscreenControl: false,
+  styles: getMapStyles()
+};
 
+const BoxStyle = {
+  left: 0,
+  top: 0,
+  height: '100vh',
+  width: '100vw',
+  position: 'fixed',
+  zIndex: '-99'
+};
+
+export default ({ location }) => {
   let marker;
   if (location.latitude) {
     marker = <Circle
@@ -19,22 +28,14 @@ export default ({ location }) => {
   };
 
   return (
-    <div style={{
-      left: 0,
-      top: 0,
-      height: '100vh',
-      width: '100%',
-      position: 'fixed',
-      zIndex: '-99'
-    }}>
+    <Box style={BoxStyle}>
       <GoogleMap
         bootstrapURLKeys={{ key: 'AIzaSyBDt751gCioCA8kHVZQmWwUj8-HkvaK5hY' }}
         defaultCenter={[-25.356489, 134.207020]}
         defaultZoom={5}
-        options={options}
-      >
+        options={mapOptions}>
         {marker}
       </GoogleMap>
-    </div>
+    </Box>
   )
 };

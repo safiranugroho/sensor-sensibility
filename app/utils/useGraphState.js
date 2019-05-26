@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import getData from './getData';
-import { Element } from './enums';
+import { Element, Color } from './enums';
 
 const defaultSeries = {
   [Element.TEMPERATURE]: {
@@ -31,7 +31,7 @@ const defaultOptions = {
     toolbar: { show: false },
     animations: { enabled: false }
   },
-  colors: ['#004D40', '#FFC107', '#D81B60', '#1E88E5'],
+  colors: Object.values(Color),
   stroke: { curve: 'smooth' },
   grid: { show: false },
   fill: {
@@ -43,6 +43,7 @@ const defaultOptions = {
   },
   markers: { size: 0 },
   tooltip: {
+    enabled: false,
     x: { show: false }
   },
   legend: { show: 'false' },

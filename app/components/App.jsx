@@ -7,23 +7,27 @@ import Map from './Map';
 import readFromFile from '../utils/readFromFile';
 import getLocation from '../utils/getLocation';
 
-export default () => {
-  const [currentSensorGroup, setCurrentSensorGroup] = useState('group_all');
-  const sensorGroups = readFromFile(getLocation);
-  const currentLocation = sensorGroups.find(({ name }) => name === currentSensorGroup);
+const ProviderStyle = {
+  padding: '0 20px',
+  height: '100vh',
+  overflow: 'hidden'
+};
 
-  const handleOnChange = (event) => setCurrentSensorGroup(event.target.value);
+const ToolbarStyle = {
+  background: 'transparent',
+  color: 'black'
+};
+
+export default () => {
+  const [currentSensorGroupName, setCurrentSensorGroupName] = useState('group_all');
+  const sensorGroups = readFromFile(getLocation);
+  const currentLocation = sensorGroups.find(({ name }) => name === currentSensorGroupName);
+
+  const handleOnChange = (event) => setCurrentSensorGroupName(event.target.value);
 
   return (
-    <Provider style={{
-      padding: '0 20px',
-      height: '100vh',
-      overflow: 'hidden'
-    }}>
-      <Toolbar style={{
-        background: 'transparent',
-        color: 'black'
-      }}>
+    <Provider style={ProviderStyle}>
+      <Toolbar style={ToolbarStyle}>
         <Heading py={20}>
           Sensor Sensibility
         </Heading>
@@ -31,7 +35,7 @@ export default () => {
           sensorGroups={sensorGroups}
           onChange={handleOnChange} />
       </Toolbar>
-      <Graph sensorGroupName={currentSensorGroup} />
+      <Graph sensorGroupName={currentSensorGroupName} />
       <Map location={currentLocation} />
     </Provider>
   )
