@@ -6,10 +6,10 @@ export default (sensorGroups) => {
 
   for (const name in sensorGroups) {
     data[name] = [
-      { name: Element.LIGHT, x: timestamp, y: sensorGroups[name].light },
-      { name: Element.HUMIDITY, x: timestamp, y: sensorGroups[name].humidity },
-      { name: Element.RADIATION, x: timestamp, y: sensorGroups[name].radiation },
-      { name: Element.TEMPERATURE, x: timestamp, y: sensorGroups[name].temperature },
+      { name: Element.LIGHT, xAxis: timestamp, yAxis: sensorGroups[name].light },
+      { name: Element.HUMIDITY, xAxis: timestamp, yAxis: sensorGroups[name].humidity },
+      { name: Element.RADIATION, xAxis: timestamp, yAxis: sensorGroups[name].radiation },
+      { name: Element.TEMPERATURE, xAxis: timestamp, yAxis: sensorGroups[name].temperature },
     ];
   };
 

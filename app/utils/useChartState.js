@@ -53,10 +53,20 @@ const defaultOptions = {
   },
   yaxis: [
     { seriesName: Element.TEMPERATURE, range: 5, labels: { show: false } },
-    { seriesName: Element.LIGHT, range: 15, labels: { show: false } },
+    { seriesName: Element.LIGHT, range: 20, labels: { show: false } },
     { seriesName: Element.RADIATION, range: 1, labels: { show: false } },
     { seriesName: Element.HUMIDITY, range: 1, labels: { show: false } },
   ]
+};
+
+const getNextData = (yAxis, lastData, dataSize) => {
+  const nextData = [...lastData, yAxis];
+  if (nextData.length > dataSize) {
+    nextData[0] = null;
+    nextData.shift();
+  };
+
+  return nextData;
 };
 
 export default (groupName) => {
@@ -68,21 +78,15 @@ export default (groupName) => {
     const sensorGroup = getData(sensorGroups)[groupName];
 
     if (sensorGroup) {
-      sensorGroup.forEach(element => {
-        const lastData = [...series[element.name].data].pop();
-        if (element.y === lastData) return;
-
-        const nextData = [...series[element.name].data, element.y];
-        if (nextData.length > 50) {
-          nextData[0] = null;
-          nextData.shift();
-        };
+      sensorGroup.forEach(({ name, yAxis }) => {
+        const lastData = series[name].data;
+        if (yAxis === [...lastData].pop()) return;
 
         updateSeries({
           ...series,
-          [element.name]: {
-            ...series[element.name],
-            data: nextData
+          [name]: {
+            ...series[name],
+            data: getNextData(yAxis, lastData, 50)
           }
         });
       });
