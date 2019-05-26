@@ -1,17 +1,13 @@
 import Element from './Element';
 
-export default (sensorGroups) => {
-  const data = {};
+export default (sensorGroup) => {
   const timestamp = Date.now();
-
-  for (const name in sensorGroups) {
-    data[name] = [
-      { name: Element.LIGHT, xAxis: timestamp, yAxis: sensorGroups[name].light },
-      { name: Element.HUMIDITY, xAxis: timestamp, yAxis: sensorGroups[name].humidity },
-      { name: Element.RADIATION, xAxis: timestamp, yAxis: sensorGroups[name].radiation },
-      { name: Element.TEMPERATURE, xAxis: timestamp, yAxis: sensorGroups[name].temperature },
-    ];
-  };
+  const data = [
+    { name: Element.LIGHT, xAxis: timestamp, yAxis: sensorGroup.light },
+    { name: Element.HUMIDITY, xAxis: timestamp, yAxis: sensorGroup.humidity },
+    { name: Element.RADIATION, xAxis: timestamp, yAxis: sensorGroup.radiation },
+    { name: Element.TEMPERATURE, xAxis: timestamp, yAxis: sensorGroup.temperature }
+  ];
 
   return data;
 };

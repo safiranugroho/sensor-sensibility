@@ -69,16 +69,16 @@ const getNextData = (yAxis, lastData, dataSize) => {
   return nextData;
 };
 
-export default (groupName) => {
-  const [sensorGroups, updateSensorGroups] = useState({});
+export default () => {
+  const [sensorGroup, updateSensorGroup] = useState({});
   const [series, updateSeries] = useState(defaultSeries);
 
-  const updateChartState = (sensorGroupsFromAPI) => {
-    updateSensorGroups(sensorGroupsFromAPI);
-    const sensorGroup = getData(sensorGroups)[groupName];
+  const updateGraphState = (sensorGroupFromAPI) => {
+    updateSensorGroup(sensorGroupFromAPI);
+    const sensorGroupData = getData(sensorGroup);
 
-    if (sensorGroup) {
-      sensorGroup.forEach(({ name, yAxis }) => {
+    if (sensorGroupData) {
+      sensorGroupData.forEach(({ name, yAxis }) => {
         const lastData = series[name].data;
         if (yAxis === [...lastData].pop()) return;
 
@@ -86,7 +86,7 @@ export default (groupName) => {
           ...series,
           [name]: {
             ...series[name],
-            data: getNextData(yAxis, lastData, 50)
+            data: getNextData(yAxis, lastData, 30)
           }
         });
       });
@@ -94,8 +94,7 @@ export default (groupName) => {
   };
 
   return [{
-    sensorGroups,
     options: defaultOptions,
     series: Object.values(series)
-  }, updateChartState];
+  }, updateGraphState];
 };
