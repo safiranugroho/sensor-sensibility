@@ -19,4 +19,6 @@ The sensor stream it connects to can be found here: https://www.pubnub.com/devel
 
 ## Running the application
 Clone the repository and run `./go` to run the application locally.
-This will open `http://localhost:1234` on your browser.
+This will open `http://localhost:1234` on your browser. It should look something like:
+
+![alt text](docs/screenshot.png "App screenshot")
