@@ -2,7 +2,22 @@ import React from 'react';
 import GoogleMap from 'google-map-react';
 import { Circle } from 'rebass';
 
+import getMapStyles from '../utils/getMapStyles';
+
 export default ({ location }) => {
+  const options = {
+    fullscreenControl: false,
+    styles: getMapStyles()
+  };
+
+  let marker;
+  if (location.latitude) {
+    marker = <Circle
+      style={{ background: 'black' }}
+      lat={location.latitude}
+      lng={location.longitude} />
+  };
+
   return (
     <div style={{
       left: 0,
@@ -16,11 +31,9 @@ export default ({ location }) => {
         bootstrapURLKeys={{ key: 'AIzaSyBDt751gCioCA8kHVZQmWwUj8-HkvaK5hY' }}
         defaultCenter={[-25.356489, 134.207020]}
         defaultZoom={5}
+        options={options}
       >
-        <Circle
-          lat={location.latitude}
-          lng={location.longitude}
-        />
+        {marker}
       </GoogleMap>
     </div>
   )

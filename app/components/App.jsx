@@ -15,7 +15,11 @@ export default () => {
   const handleOnChange = (event) => setCurrentSensorGroup(event.target.value);
 
   return (
-    <Provider px={20}>
+    <Provider style={{
+      padding: '0 20px',
+      height: '100vh',
+      overflow: 'hidden'
+    }}>
       <Toolbar style={{
         background: 'transparent',
         color: 'black'

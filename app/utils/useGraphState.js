@@ -45,7 +45,7 @@ const defaultOptions = {
   tooltip: {
     x: { show: false }
   },
-  legend: { position: 'left' },
+  legend: { show: 'false' },
   xaxis: {
     tooltip: { enabled: false },
     axisBorder: { show: false },
