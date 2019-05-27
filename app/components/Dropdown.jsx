@@ -11,10 +11,10 @@ const SelectStyle = {
   border: '0',
 };
 
-export default ({ sensorGroups, onChange }) =>
+export default ({ onChange }) =>
   <Select onChange={onChange} style={SelectStyle}>
     {
-      sensorGroups.map(({ name }, key) =>
+      Object.keys(SensorGroup).map((name, key) =>
         <option key={key} value={name}>
           {SensorGroup[name]}
         </option>)

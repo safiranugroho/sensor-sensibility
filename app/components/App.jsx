@@ -6,6 +6,7 @@ import Dropdown from './Dropdown';
 import Map from './Map';
 import readFromFile from '../utils/readFromFile';
 import getLocation from '../utils/getLocation';
+import { SensorGroup } from '../utils/enums';
 
 const ProviderStyle = {
   padding: '0 20px',
@@ -19,7 +20,8 @@ const ToolbarStyle = {
 };
 
 export default () => {
-  const [currentSensorGroupName, setCurrentSensorGroupName] = useState('group_all');
+  const defaultSensorGroup = Object.keys(SensorGroup).shift();
+  const [currentSensorGroupName, setCurrentSensorGroupName] = useState(defaultSensorGroup);
   const sensorGroups = readFromFile(getLocation);
   const currentLocation = sensorGroups.find(({ name }) => name === currentSensorGroupName);
 

@@ -6,6 +6,7 @@ export const Element = {
 };
 
 export const SensorGroup = {
+  group_all: 'All groups',
   group_0: 'Group 0',
   group_1: 'Group 1',
   group_2: 'Group 2',
@@ -16,8 +17,7 @@ export const SensorGroup = {
   group_7: 'Group 7',
   group_8: 'Group 8',
   group_9: 'Group 9',
-  group_10: 'Group 10',
-  group_all: 'All groups'
+  group_10: 'Group 10'
 };
 
 export const Color = {

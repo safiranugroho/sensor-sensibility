@@ -20,7 +20,7 @@ const BoxStyle = {
 
 export default ({ location }) => {
   let marker;
-  if (location.latitude) {
+  if (location) {
     marker = <Circle
       style={{ background: 'black' }}
       lat={location.latitude}

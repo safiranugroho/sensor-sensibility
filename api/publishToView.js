@@ -13,8 +13,10 @@ export const aggregateDataFromStream = (sensorGroups, data) => {
 export const publishFromStream = (data) => {
   sensorGroups = aggregateDataFromStream(sensorGroups, data);
 
-  if (out) out.write(`data: ${JSON.stringify(sensorGroups)}\n\n`);
-  else console.log(sensorGroups);
+  if (out) {
+    out.write(`retry: 5000\n`);
+    out.write(`data: ${JSON.stringify(sensorGroups)}\n\n`)
+  } else { console.log(sensorGroups) };
 };
 
 export default (request, response) => {
