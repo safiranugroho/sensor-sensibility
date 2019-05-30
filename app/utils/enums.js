@@ -1,8 +1,8 @@
 export const Element = {
-  LIGHT: 'Light',
-  HUMIDITY: 'Humidity',
-  TEMPERATURE: 'Temperature',
-  RADIATION: 'Radiation'
+  TEMPERATURE: { text: 'Temperature', unit: '°C', color: '#004D40' },
+  LIGHT: { text: 'Light', unit: 'w/m2', color: '#FFC107' },
+  RADIATION: { text: 'Radiation', unit: 'millirads/hour', color: '#D81B60' },
+  HUMIDITY: { text: 'Humidity', unit: '%', color: '#1E88E5' },
 };
 
 export const SensorGroup = {
@@ -19,10 +19,3 @@ export const SensorGroup = {
   group_9: 'Group 9',
   group_10: 'Group 10'
 };
-
-export const Color = {
-  [Element.TEMPERATURE]: '#004D40',
-  [Element.LIGHT]: '#FFC107',
-  [Element.RADIATION]: '#D81B60',
-  [Element.HUMIDITY]: '#1E88E5'
-}

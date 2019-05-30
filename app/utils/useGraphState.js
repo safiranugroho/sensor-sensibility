@@ -1,37 +1,40 @@
 import { useState } from 'react';
 
 import getData from './getData';
-import { Element, Color } from './enums';
+import { Element } from './enums';
+
+const { TEMPERATURE, LIGHT, RADIATION, HUMIDITY } = Element;
+const colors = Object.values(Element).map(({ color }) => color);
 
 const defaultSeries = {
-  [Element.TEMPERATURE]: {
-    name: Element.TEMPERATURE,
+  [TEMPERATURE.text]: {
+    name: TEMPERATURE.text,
     type: 'line',
     data: []
   },
-  [Element.LIGHT]: {
-    name: Element.LIGHT,
+  [LIGHT.text]: {
+    name: LIGHT.text,
     type: 'line',
     data: []
   },
-  [Element.RADIATION]: {
-    name: Element.RADIATION,
+  [RADIATION.text]: {
+    name: RADIATION.text,
     type: 'line',
     data: []
   },
-  [Element.HUMIDITY]: {
-    name: Element.HUMIDITY,
+  [HUMIDITY.text]: {
+    name: HUMIDITY.text,
     type: 'line',
     data: []
   },
 };
 
 const defaultOptions = {
+  colors,
   chart: {
     toolbar: { show: false },
     animations: { enabled: false }
   },
-  colors: Object.values(Color),
   stroke: { curve: 'smooth' },
   grid: { show: false },
   fill: {
@@ -53,10 +56,10 @@ const defaultOptions = {
     labels: { show: false }
   },
   yaxis: [
-    { seriesName: Element.TEMPERATURE, range: 5, labels: { show: false } },
-    { seriesName: Element.LIGHT, range: 20, labels: { show: false } },
-    { seriesName: Element.RADIATION, range: 1, labels: { show: false } },
-    { seriesName: Element.HUMIDITY, range: 1, labels: { show: false } },
+    { seriesName: TEMPERATURE.text, range: 5, labels: { show: false } },
+    { seriesName: LIGHT.text, range: 20, labels: { show: false } },
+    { seriesName: RADIATION.text, range: 1, labels: { show: false } },
+    { seriesName: HUMIDITY.text, range: 1, labels: { show: false } },
   ]
 };
 

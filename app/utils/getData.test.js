@@ -4,6 +4,8 @@ import { Element } from './enums';
 describe('getData', () => {
   it('should take the light, humidity, radiation, and temperature readings ' +
     'from sensorGroups object', () => {
+      const { LIGHT, HUMIDITY, RADIATION, TEMPERATURE } = Element;
+
       const sensorGroup = {
         latitude: '-123.231',
         longitude: '123.231',
@@ -14,19 +16,19 @@ describe('getData', () => {
       };
 
       const expectedData = [{
-        name: Element.LIGHT,
+        name: LIGHT.text,
         xAxis: Date.now(),
         yAxis: 32.1,
       }, {
-        name: Element.HUMIDITY,
+        name: HUMIDITY.text,
         xAxis: Date.now(),
         yAxis: 12.3,
       }, {
-        name: Element.RADIATION,
+        name: RADIATION.text,
         xAxis: Date.now(),
         yAxis: 32.1,
       }, {
-        name: Element.TEMPERATURE,
+        name: TEMPERATURE.text,
         xAxis: Date.now(),
         yAxis: 12.3,
       }];
