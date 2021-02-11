@@ -23,7 +23,7 @@
     "styled-components": "^4.2.0"
   },
   "dependencies": {
-    "apexcharts": "^3.6.12",
+    "apexcharts": "^3.24.0",
     "google-map-react": "^1.1.4",
     "pubnub": "^4.24.0",
     "react": "^16.8.6",
